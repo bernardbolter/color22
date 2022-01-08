@@ -11,8 +11,11 @@ jobs:
     - name: 🚚 Get latest code
       uses: actions/checkout@v2
     
+    - name: Install Gatsby CLI
+      run: npm install -g gatsby-cli@2.12.34
+    
     - name: Build
-      run: yarn run build
+      run: gatsby build
     
     - name: Verify build
       run: ls -la public
