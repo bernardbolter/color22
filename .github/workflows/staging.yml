@@ -10,6 +10,23 @@ jobs:
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v2
+
+    - name: Install Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '13.x'
+      
+    - name: Install Project Dependencies
+      run: npm ci
+    
+    - name: Install Gatsby CLI
+      run: npm install -g gatsby-cli@2.12.34
+    
+    - name: Build
+      run: gatsby build
+    
+    - name: Verify build
+      run: ls -la public
     
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.2.0
@@ -18,3 +35,4 @@ jobs:
         username: ${{ secrets.ftp_username }}
         password: ${{ secrets.ftp_password }}
         server-dir: /staging.acolorfulhistory.com/
+        local-dir: ./public/
