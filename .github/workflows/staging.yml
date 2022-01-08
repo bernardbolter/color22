@@ -10,6 +10,9 @@ jobs:
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v2
+
+    - name: install dependencies
+      uses: yarn install
     
     - name: Install Gatsby CLI
       run: npm install -g gatsby-cli@2.12.34
