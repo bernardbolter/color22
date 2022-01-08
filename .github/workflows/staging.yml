@@ -10,20 +10,9 @@ jobs:
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v2
-
-    - name: Install Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: '13.x'
-      
-    - name: Install Project Dependencies
-      run: npm ci
-    
-    - name: Install Gatsby CLI
-      run: npm install -g gatsby-cli@2.12.34
     
     - name: Build
-      run: gatsby build
+      run: yarn run build
     
     - name: Verify build
       run: ls -la public
