@@ -10,6 +10,18 @@ jobs:
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v2
+
+    - name: install dependencies
+      run: yarn install
+    
+    - name: Install Gatsby CLI
+      run: npm install -g gatsby-cli@2.12.34
+    
+    - name: Build
+      run: gatsby build
+    
+    - name: Verify build
+      run: ls -la public
     
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.2.0
@@ -17,4 +29,5 @@ jobs:
         server: ftp.bernardbolter.com
         username: ${{ secrets.ftp_username }}
         password: ${{ secrets.ftp_password }}
-        server-dir: /ach
+        server-dir: /staging.acolorfulhistory.com/
+        local-dir: ./public/
