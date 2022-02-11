@@ -39,7 +39,7 @@ module.exports = {
     },
     "gatsby-transformer-json",
     {
-      resolve :"gatsby-source-filesystem",
+      resolve : "gatsby-source-filesystem",
       options: {
         name: "data",
         path: `${__dirname}/src/data/`,
@@ -60,6 +60,14 @@ module.exports = {
         // Array of strings with fields you'd like to create nodes for...
         fields: ['products', 'products/categories', 'products/attributes'],
       }
+    },
+    {
+      resolve: "gatsby-source-strapi",
+      options: {
+        apiURL: `http://localhost:1337/api`,
+        queryLimit: 1000,
+        collectionTypes: ["artwork"]
+      },
     },
   ],
 };

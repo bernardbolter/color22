@@ -17,7 +17,8 @@ const ArtworkProvider = ({ children }) => {
         navOpen: false,
         viewMap: false,
         viewContact: false,
-        viewGates: false
+        viewGates: false,
+        artworkURL: 'https://madeinberlin.net/artwork/'
     })
 
     useEffect(() => {

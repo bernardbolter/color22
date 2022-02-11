@@ -16,49 +16,40 @@ import '../styles/index.scss'
 
 const IndexPage = () => {
   const initialArtwork = useStaticQuery(graphql`
-    query PaintingsQuery {
-      allAColorfulHistoryJson {
-        nodes {
-          city
-          description
-          height
-          id
-          lat
-          lng
-          medium
-          slug
-          sold
-          price
-          title
-          width
-          wikiLink
-          wikiTitle
-          year
-          wikiAccessed
-          painting {
-            childImageSharp {
-              gatsbyImageData(
-                aspectRatio: 1
-                tracedSVGOptions: {alphaMax: 1.5}
-                layout: CONSTRAINED
-                jpgOptions: {progressive: true}
-                formats: AUTO
-              )
-            }
-          }
-          og {
-            childImageSharp {
-              gatsbyImageData(
-                tracedSVGOptions: {alphaMax: 1.5}
-                layout: CONSTRAINED
-                placeholder: TRACED_SVG
-              )
+    query StrapiArtworkQuery {
+      allStrapiArtwork {
+        edges {
+          node {
+            data {
+              attributes {
+                city
+                description
+                height
+                lat
+                lng
+                medium
+                price
+                publishedAt
+                slug
+                sold
+                title
+                updatedAt
+                width
+                wikiAccessed
+                wikiLink
+                wikiText
+                wikiTitle
+                year
+              }
+              id
             }
           }
         }
       }
     }
   `)
+
+  console.log(initialArtwork)
 
   const [artwork, setArtwork] = useContext(ArtworkContext)
   console.log(artwork)
@@ -67,8 +58,14 @@ const IndexPage = () => {
 
   useEffect(() => {
     let shuffledArt = []
-    if (initialArtwork.allAColorfulHistoryJson.nodes.length !== 0) {
-      shuffledArt = shuffle(initialArtwork.allAColorfulHistoryJson.nodes)
+    if (initialArtwork.allStrapiArtwork.edges[0].node.data.length !== 0) {
+      const originalArt = []
+      initialArtwork.allStrapiArtwork.edges[0].node.data.map(art => {
+        const artToPush = art.attributes
+        artToPush["strapiId"] = art.id
+        originalArt.push(artToPush)
+      })
+      shuffledArt = shuffle(originalArt)
     }
     setArtwork(state => ({ ...state, filtered: shuffledArt, original: shuffledArt }))
   }, [])

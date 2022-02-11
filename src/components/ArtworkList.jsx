@@ -45,7 +45,7 @@ const ArtworkList = () => {
                         <div className="art-info">
                             <h1>{artwork.title}</h1>
                             <div className="art-info-container">
-                                <p>{artwork.description}</p>
+                                <p>{artwork.wikiText}</p>
                                 <div className="wiki-container">
                                     <h5>{artwork.wikiTitle} | {artwork.wikiAccessed}</h5>
                                     <a href={artwork.wikiLink}>{artwork.wikiLink}</a>
